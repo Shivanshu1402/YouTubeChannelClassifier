@@ -4,11 +4,24 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
 import numpy as np
 import re
-from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+from nltk.data import find
+from nltk.data import LookupError
+from nltk.stem import WordNetLemmatizer
+
+# Function to download NLTK resources if not already present
+def download_nltk_resources():
+    try:
+        find('corpora/stopwords.zip')
+    except LookupError:
+        import nltk
+        nltk.download('stopwords')
+
+# Download NLTK resources
+download_nltk_resources()
 
 # Load the model
-model = tf.keras.models.load_model('youtube_channel_classifier_model.h5')
+model = tf.keras.models.load_model('youtube_channel_classifier_model.keras')
 
 # Define parameters
 paddingLen = 70
@@ -81,7 +94,7 @@ st.markdown("""
         margin: 0;
     }
     .footer h3 {
-        color: #34495e; /* Dark color for headings */
+        color: #ecf0f1; /* Dark color for headings */
     }
     .main h1, .main h2, .main h3 {
         color: #34495e; /* Dark color for headings */
@@ -117,13 +130,11 @@ st.markdown("""
         <p>Phone: 9670439648</p>
         <p>Email: <a href="mailto:shivanshutripathi007@gmail.com">shivanshutripathi007@gmail.com</a></p>
         <div class="links">
-            <a href="https://www.linkedin.com/in/shivanshu14/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a>
-            <a href="https://www.instagram.com/shivanshu__2041/" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
-            <a href="https://github.com/Shivanshu1402" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+            <a href="https://www.linkedin.com/in/shivanshu-tripathi" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a>
+            <a href="https://www.instagram.com/shivanshu_tripathi" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+            <a href="https://github.com/shivanshutripathi" target="_blank"><i class="fab fa-github"></i>GitHub</a>
         </div>
         <h3>About</h3>
-        <p>The YouTube Channel Classifier App uses a TensorFlow LSTM model to categorize videos based on their titles and descriptions  </p>
-        <p>It is deployed via a user-friendly Streamlit web application, allowing users to input video details and receive instant category predictions.</p>
-        <p>The system integrates advanced machine learning techniques with an intuitive interface for real-time classification and performance tracking..</p>
+        <p>This app classifies YouTube video categories based on the title and description provided. Built using TensorFlow and Streamlit.</p>
     </div>
     """, unsafe_allow_html=True)
