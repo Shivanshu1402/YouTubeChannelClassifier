@@ -6,7 +6,6 @@ import numpy as np
 import re
 from nltk.corpus import stopwords
 from nltk.data import find
-from nltk.data import LookupError
 from nltk.stem import WordNetLemmatizer
 
 # Function to download NLTK resources if not already present
@@ -20,8 +19,8 @@ def download_nltk_resources():
 # Download NLTK resources
 download_nltk_resources()
 
-# Load the model
-model = tf.keras.models.load_model('youtube_channel_classifier_model.keras')
+# Load the model (using .h5 format)
+model = tf.keras.models.load_model('youtube_channel_classifier_model.h5')
 
 # Define parameters
 paddingLen = 70
